@@ -1,0 +1,702 @@
+{
+	"info": {
+		"_postman_id": "5d3b3518-9513-42f6-a337-e33c16be46ec",
+		"name": "AgapeBackend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17341021",
+		"_collection_link": "https://univesp.postman.co/workspace/Univesp~a4e4e941-a03e-43d8-825d-aa8786882bbe/collection/17341021-5d3b3518-9513-42f6-a337-e33c16be46ec?action=share&source=collection_link&creator=17341021"
+	},
+	"item": [
+		{
+			"name": "Campaign",
+			"item": [
+				{
+					"name": "Post Campaign",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"campaignYear\": 2025,\n    \"campaignChurch\": \"teste 1\",\n    \"foodDonationPerFamily\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/campaign",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"campaign"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Campaign by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/campaign/999",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"campaign",
+								"999"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Campaigns",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/campaign",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"campaign"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put Campaign",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sponsorId\": \"7\",\n    \"sponsorName\": \"teste update fix2\",\n    \"sponsorPhone\": \"aaaaaa\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/sponsor/7",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sponsor",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Neighborhood",
+			"item": [
+				{
+					"name": "Post Neighborhood",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "secret",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"neighborhoodName\": \"São\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/neighborhood",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"neighborhood"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put Neighborhood",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"neighborhoodId\": 1,\n    \"neighborhoodName\": \"Jardim Centenário\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/neighborhood",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"neighborhood"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Neighborhood by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/neighborhood/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"neighborhood",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Neighborhoods",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/neighborhood",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"neighborhood"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sponsor",
+			"item": [
+				{
+					"name": "Post Sponson",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sponsorName\": \"Flavio\",\n    \"sponsorPhone\": \"119999999\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/sponsor",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sponsor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put Sponsor",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sponsorId\": 1,\n    \"sponsorName\": \"Flavio\",\n    \"sponsorPhone\": \"119999999\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/sponsor/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sponsor",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Sponsor by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/sponsor/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sponsor",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Sponsor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/sponsor",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sponsor"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Family",
+			"item": [
+				{
+					"name": "Post Family",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"responsibleName\": \"nome teste\",\n    \"phoneNumber\": \"123456\",\n    \"address\": \"endereço teste\",\n    \"neighborhoodId\": 1,\n    \"observation\": \"nenhuma\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/family",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"family"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put Family",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"responsibleName\": \"nome 444 updated\",\n    \"phoneNumber\": \"123456\",\n    \"address\": \"endereço 2\",\n    \"neighborhoodId\": 2,\n    \"observation\": \"teste\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/family/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"family",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get family by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/family/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"family",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get families",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/family",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"family"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deactivate Famiy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/family/7",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"family",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Child",
+			"item": [
+				{
+					"name": "Post Child",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"childName\": \"aaa\",\n    \"gender\": \"MALE\",\n    \"birthDate\": \"10/10/2020\",\n    \"clothes\": \"12\",\n    \"shoes\": \"10\",\n    \"pictureUrl\": null,\n    \"familyId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/child",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"child"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post pic",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/juliocesargama/Downloads/unnamed.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/upload",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "see pic",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/upload/open/1fema1IAkaoR6sNYuHZJzu11cw85hJeUi",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"upload",
+								"open",
+								"1fema1IAkaoR6sNYuHZJzu11cw85hJeUi"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deactivate Child",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/child/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"child",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Food Contribution",
+			"item": [
+				{
+					"name": "foodContribution",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"campaignId\": 1,\n    \"sponsorId\": 1,\n    \"familyId\": 5,\n    \"leaderId\": 1,\n    \"wasDelivered\": true,\n    \"paidInSpecies\": true,\n    \"donationDate\": null,\n    \"observation\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/food-contribution",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"food-contribution"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "foodContribution by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/food-contribution/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"food-contribution",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "foodContribution Report",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/food-contribution/report/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"food-contribution",
+								"report",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Leadership",
+			"item": [
+				{
+					"name": "get leadership",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/leadership",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"leadership"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Child Contribution",
+			"item": [
+				{
+					"name": "get contribution by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/child-contribution/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"child-contribution",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Request Auth",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"lider@lider.com\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

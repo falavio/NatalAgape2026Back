@@ -1,0 +1,300 @@
+{
+	"info": {
+		"_postman_id": "5afd91d8-2d5e-4550-86c4-933e4bd2c5cc",
+		"name": "AgapeBackend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43378000"
+	},
+	"item": [
+		{
+			"name": "Campaign",
+			"item": [
+				{
+					"name": "Post Campaign",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"campaignYear\": 2025,\n    \"campaignChurch\": \"teste 1\",\n    \"foodDonationPerFamily\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/campaign",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"campaign"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Campaign by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/campaign/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"campaign",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Campaigns",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/campaign",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"campaign"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put Campaign",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"campaignId\": 1,\n    \"campaignYear\": 2025,\n    \"campaignChurch\": \"teste update\",\n    \"foodDonationPerFamily\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/campaign",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"campaign"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Neighborhood",
+			"item": [
+				{
+					"name": "Post Neighborhood",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"neighborhoodName\": \"São Gonçalo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/neighborhood",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"neighborhood"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put Neighborhood",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"neighborhoodId\": 1,\n    \"neighborhoodName\": \"Jardim Centenário\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/neighborhood",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"neighborhood"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Neighborhood by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/neighborhood/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"neighborhood",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Neighborhoods",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/neighborhood",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"neighborhood"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Leadership",
+			"item": [
+				{
+					"name": "Post Leadership",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"leaderName\": \"Leader1\",\n  \"leaderPhone\": \"123456789\",\n  \"leaderRole\": \"ADMIN\",\n  \"leaderColor\": \"RED\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/leadership",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"leadership"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Leaderships",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get Leadership by Id",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Put Leadership",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"leaderId\": 1,\n  \"leaderName\": \"Updated Leader\",\n  \"leaderPhone\": \"987654321\",\n  \"leaderRole\": \"LEADER\",\n  \"leaderColor\": \"BLUE\"\n  \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/leadership/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"leadership",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
