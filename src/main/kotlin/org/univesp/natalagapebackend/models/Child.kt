@@ -2,7 +2,6 @@ package org.univesp.natalagapebackend.models
 
 import jakarta.persistence.*
 import lombok.Data
-import java.time.LocalDate
 
 @Data
 @Entity
@@ -19,7 +18,7 @@ data class Child(
     val gender: String,
 
     @Column(nullable = false)
-    val birthDate: LocalDate,
+    val age: Int,
 
     val clothes: String? = null,
 

@@ -5,9 +5,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
 import org.springframework.http.ResponseEntity
-import org.univesp.natalagapebackend.dto.ChildContributionRequest
-import org.univesp.natalagapebackend.dto.toDTOEditResponse
-import org.univesp.natalagapebackend.dto.toDTOResponse
+import org.univesp.natalagapebackend.dto.*
 import org.univesp.natalagapebackend.models.*
 import org.univesp.natalagapebackend.services.ChildContributionService
 import java.time.LocalDate
@@ -62,7 +60,7 @@ class ChildContributionControllerTest {
         childId = 1,
         childName = "Maria",
         gender = "Feminino",
-        birthDate = LocalDate.of(2015, 5, 20),
+        age = 11,
         clothes = "Camiseta tamanho M",
         shoes = "Tênis tamanho 34",
         pictureUrl = "https://example.com/maria.jpg",
@@ -154,5 +152,46 @@ class ChildContributionControllerTest {
         val result = childContributionController.update(999L, request)
 
         assertEquals(ResponseEntity.notFound().build(), result)
+    }
+
+    @Test
+    fun reportReturnsChildIdAndFamilyIdInAllLists() {
+        val contributionWithDelivery = ChildContribution(
+            1, campaign, sponsor, leadership, child, true, true, donationDate1, observation1
+        )
+        val contributionPending = ChildContribution(
+            2, campaign, sponsor, leadership, child, false, false, null, observation2
+        )
+
+        val report = childContributionToDTOReport(
+            listOf(contributionWithDelivery),
+            listOf(child)
+        )
+
+        // Verifica childId e familyId na lista com contribuicao
+        assertEquals(1, report.childrenWithContributionList.size)
+        assertEquals(child.childId, report.childrenWithContributionList[0].childId)
+        assertEquals(family.familyId, report.childrenWithContributionList[0].familyId)
+
+        val reportPending = childContributionToDTOReport(
+            listOf(contributionPending),
+            listOf(child)
+        )
+
+        // Verifica childId e familyId na lista pendente
+        assertEquals(1, reportPending.childrenWithPendingContributionList.size)
+        assertEquals(child.childId, reportPending.childrenWithPendingContributionList[0].childId)
+        assertEquals(family.familyId, reportPending.childrenWithPendingContributionList[0].familyId)
+
+        val child2 = child.copy(childId = 2, childName = "Joao")
+        val reportNoContribution = childContributionToDTOReport(
+            emptyList(),
+            listOf(child2)
+        )
+
+        // Verifica childId e familyId na lista sem contribuicao
+        assertEquals(1, reportNoContribution.childrenWithNoContributionList.size)
+        assertEquals(child2.childId, reportNoContribution.childrenWithNoContributionList[0].childId)
+        assertEquals(family.familyId, reportNoContribution.childrenWithNoContributionList[0].familyId)
     }
 }

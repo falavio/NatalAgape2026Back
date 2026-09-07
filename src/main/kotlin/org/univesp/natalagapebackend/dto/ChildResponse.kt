@@ -2,13 +2,12 @@ package org.univesp.natalagapebackend.dto
 
 import org.univesp.natalagapebackend.models.Child
 import org.univesp.natalagapebackend.models.Family
-import java.time.LocalDate
 
 data class ChildResponse(
     val childId: Long? = null,
     val childName: String,
     val gender: String,
-    val birthDate: LocalDate,
+    val age: Int,
     val clothes: String? = null,
     val shoes: String? = null,
     val pictureUrl: String? = null,
@@ -19,7 +18,7 @@ fun Child.toResponse(family: Family): ChildResponse {
     return ChildResponse(
         childId = this.childId,
         childName = this.childName,
-        birthDate = this.birthDate,
+        age = this.age,
         gender   = this.gender,
         clothes = this.clothes,
         shoes = this.shoes,

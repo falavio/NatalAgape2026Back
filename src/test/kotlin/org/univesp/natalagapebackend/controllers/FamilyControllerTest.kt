@@ -59,7 +59,7 @@ class FamilyControllerTest {
         )
 
         val child = Child(
-            1, "name", "Male", LocalDate.now(), "", "", null, true,family01
+            1, "name", "Male", 1, "", "", null, true,family01
         )
 
         val families = listOf(family01, family02)
@@ -83,7 +83,7 @@ class FamilyControllerTest {
                         childId = 1,
                         childName = "name",
                         gender = "Male",
-                        birthDate = LocalDate.now(),
+                        age = 5,
                         clothes = "",
                         shoes = "",
                         pictureUrl = null
@@ -136,7 +136,7 @@ class FamilyControllerTest {
             )
         )
         val children = listOf(
-            Child(1, "Child 1", "Male", LocalDate.now(), "Clothes", "Shoes", null,true, family)
+            Child(1, "Child 1", "Male", 1, "Clothes", "Shoes", null,true, family)
         )
         `when`(familyService.findById(1)).thenReturn(Optional.of(family))
         `when`(childService.findByFamilyId(1)).thenReturn(children)
@@ -157,7 +157,7 @@ class FamilyControllerTest {
                         childId = it.childId,
                         childName = it.childName,
                         gender = it.gender,
-                        birthDate = it.birthDate,
+                        age = it.age,
                         clothes = it.clothes,
                         shoes = it.shoes,
                         pictureUrl = it.pictureUrl

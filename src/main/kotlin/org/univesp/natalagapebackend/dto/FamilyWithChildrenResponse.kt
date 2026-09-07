@@ -2,7 +2,6 @@ package org.univesp.natalagapebackend.dto
 
 import org.univesp.natalagapebackend.models.Child
 import org.univesp.natalagapebackend.models.Family
-import java.time.LocalDate
 
 data class FamilyWithChildrenDTO(
     val familyId: Long,
@@ -23,7 +22,7 @@ data class Children(
     val childId: Long,
     val childName : String,
     val gender: String,
-    val birthDate: LocalDate,
+    val age: Int,
     val clothes: String?,
     val shoes: String?,
     val pictureUrl: String?
@@ -43,7 +42,7 @@ fun toDTOOutput(family: Family, children: List<Child>? ): FamilyWithChildrenDTO 
                 childId = it.childId,
                 childName = it.childName,
                 gender = it.gender,
-                birthDate = it.birthDate,
+                age = it.age,
                 clothes = it.clothes,
                 shoes = it.shoes,
                 pictureUrl = it.pictureUrl

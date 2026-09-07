@@ -18,6 +18,8 @@ data class ChildContributionReport(
 
 
 data class ChildrenWithContribution(
+    val childId: Long,
+    val familyId: Long,
     val responsibleName: String,
     val childName: String,
     val leaderName: String,
@@ -25,6 +27,8 @@ data class ChildrenWithContribution(
 )
 
 data class ChildrenWithNoContribution(
+    val childId: Long,
+    val familyId: Long,
     val responsibleName: String,
     val childName: String,
     val neighborhoodName: String,
@@ -32,6 +36,8 @@ data class ChildrenWithNoContribution(
 )
 
 data class ChildrenWithPendingContribution(
+    val childId: Long,
+    val familyId: Long,
     val responsibleName: String,
     val childName: String,
     val sponsorName: String,
@@ -61,26 +67,32 @@ fun childContributionToDTOReport(
         childrenWithContributionList = childContributions.filter { it.wasDelivered == true && it.acceptance != null }
             .map { childContribution ->
                 ChildrenWithContribution(
+                    childId = childContribution.child.childId,
+                    familyId = childContribution.child.family.familyId,
                     responsibleName = childContribution.child.family.responsibleName,
                     childName = childContribution.child.childName,
                     leaderName = childContribution.child.family.leadership.leaderName,
                     leaderColor = Color.valueOf(childContribution.child.family.leadership.leaderColor),
                 )
-            },
+            }.sortedBy { it.responsibleName.lowercase() },
 
         childrenWithNoContributionList = children.filter { children ->
             childContributions.none { it.child.childId == children.childId }
         }.map { child ->
             ChildrenWithNoContribution(
+                childId = child.childId,
+                familyId = child.family.familyId,
                 responsibleName = child.family.responsibleName,
                 childName = child.childName,
                 neighborhoodName = child.family.neighborhood.neighborhoodName,
                 leaderName = child.family.leadership.leaderName
             )
-        },
+        }.sortedBy { it.responsibleName.lowercase() },
         childrenWithPendingContributionList = childContributions.filter {  (it.wasDelivered == false || it.toyDelivered == false) && it.acceptance == null }
             .map { childContribution ->
                 ChildrenWithPendingContribution(
+                    childId = childContribution.child.childId,
+                    familyId = childContribution.child.family.familyId,
                     responsibleName = childContribution.child.family.responsibleName,
                     childName = childContribution.child.childName,
                     sponsorName = childContribution.sponsor.sponsorName,
@@ -90,6 +102,6 @@ fun childContributionToDTOReport(
                     toyDelivered = childContribution.toyDelivered
 
                 )
-            }
+            }.sortedBy { it.responsibleName.lowercase() }
     )
 }

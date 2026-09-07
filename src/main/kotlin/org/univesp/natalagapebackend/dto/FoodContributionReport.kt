@@ -64,7 +64,7 @@ fun toDTOReport(
                     leaderName = foodContribution.leader.leaderName,
                     leaderColor = Color.valueOf(foodContribution.leader.leaderColor),
                 )
-            },
+            }.sortedBy { it.responsibleName.lowercase() },
         familiesWithNoContributionList = families.filter { family ->
             foodContributions.none { it.family.familyId == family.familyId }
         }.map { family ->
@@ -74,7 +74,7 @@ fun toDTOReport(
                 leaderName = family.leadership.leaderName,
                 totalChildren = family.totalChildren?.size ?: 0,
             )
-        },
+        }.sortedBy { it.responsibleName.lowercase() },
         familiesWithPendingContributionList = foodContributions.filter { it.wasDelivered == false && it.donationDate == null }
             .map { foodContribution ->
                 FamiliesWithPendingContribution(
@@ -85,6 +85,6 @@ fun toDTOReport(
                     paidInSpecies = foodContribution.paidInSpecies,
                     leaderName = foodContribution.leader.leaderName
                 )
-            },
+            }.sortedBy { it.responsibleName.lowercase() },
     )
 }

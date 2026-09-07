@@ -55,7 +55,7 @@ class ChildContributionServiceTest {
             password = "password")
         val family =
             Family(1, "Family 1", "123456789", "Address 1", Neighborhood(1, "City 1"), null, leadership,true, null)
-        val child = Child(1, "Child 1", "Male", LocalDate.now(), "Clothes", "Shoes", null, true, family)
+        val child = Child(1, "Child 1", "Male", 1, "Clothes", "Shoes", null, true, family)
         val sponsor = Sponsor(1, "Sponsor 1", "123456789", "Address 1")
 
         `when`(campaignService.findById(1)).thenReturn(Optional.of(campaign))

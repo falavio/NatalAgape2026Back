@@ -33,7 +33,7 @@ class ChildServiceTest {
 
     @Test
     fun saveThrowsExceptionWhenFamilyNotFound() {
-        val childRequest = ChildRequest(1, "Child 1", "2020-01-01", "Male", "Clothes", "Shoes", null, 999 )
+        val childRequest = ChildRequest(1, "Child 1", "2020-01-01", 1,"Male", "Clothes", "Shoes",  999 )
         `when`(familyService.findById(999)).thenReturn(Optional.empty())
 
         val exception = assertThrows<IllegalArgumentException> {
@@ -45,7 +45,7 @@ class ChildServiceTest {
 
     @Test
     fun updateThrowsExceptionWhenChildNotFound() {
-        val childRequest = ChildRequest(999, "Child 1", "2020-01-01", "Male", "Clothes", "Shoes", null, 1)
+        val childRequest = ChildRequest(999, "Child 1", "2020-01-01", 1,"Male", "Clothes", "Shoes",  1)
         `when`(childRepository.findById(999)).thenReturn(Optional.empty())
 
         val exception = assertThrows<IllegalArgumentException> {
@@ -66,8 +66,8 @@ class ChildServiceTest {
             ), true
         )
         val children = listOf(
-            Child(1, "Child 1", "Male", LocalDate.now(), "Clothes", "Shoes", null, true, family),
-            Child(2, "Child 2", "Female", LocalDate.now(), "Clothes", "Shoes", null, true, family)
+            Child(1, "Child 1", "Male", 1, "Clothes", "Shoes", null, true, family),
+            Child(2, "Child 2", "Female", 1, "Clothes", "Shoes", null, true, family)
         )
         `when`(childRepository.findAllByFamilyId(1)).thenReturn(children)
 
