@@ -17,3 +17,4 @@ Front-end can be found in the [repository](https://github.com/juliocesargama/nat
 
 ### Class Diagram
 ![image](https://github.com/user-attachments/assets/0ed70d9b-53bd-46dd-8620-0b4886ac5831)
+
