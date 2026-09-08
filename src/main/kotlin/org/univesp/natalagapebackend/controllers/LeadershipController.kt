@@ -12,8 +12,12 @@ import org.univesp.natalagapebackend.services.LeadershipService
 class LeadershipController(val leadershipService: LeadershipService) {
 
     @GetMapping
-    fun getAllLeaderships(): ResponseEntity<List<LeadershipDTO>> {
-        val leaderships = leadershipService.getAllLeaderships()
+    fun getAllLeaderships(@RequestParam(required = false) campaignId: Long?): ResponseEntity<List<LeadershipDTO>> {
+        val leaderships = if (campaignId != null) {
+            leadershipService.listByCampaignId(campaignId)
+        } else {
+            leadershipService.getAllLeaderships()
+        }
         return ResponseEntity.ok(leaderships.map { it.toDTO() })
     }
 

@@ -1,5 +1,6 @@
 package org.univesp.natalagapebackend.dto
 
+import org.univesp.natalagapebackend.models.Campaign
 import org.univesp.natalagapebackend.models.Family
 import org.univesp.natalagapebackend.models.Leadership
 import org.univesp.natalagapebackend.models.Neighborhood
@@ -13,10 +14,11 @@ data class FamilyDTOInput(
     val observation: String? = null,
     val leaderId: Long,
     val pictureUrl: String? = null,
-    val pictureSubscription : String? = null
+    val pictureSubscription : String? = null,
+    val campaignId: Long = 0
 )
 
-fun FamilyDTOInput.toEntity(neighborhood: Neighborhood, leadership: Leadership): Family {
+fun FamilyDTOInput.toEntity(neighborhood: Neighborhood, leadership: Leadership, campaign: Campaign): Family {
     return Family(
         familyId = this.familyId ?: 0,
         responsibleName = this.responsibleName,
@@ -25,6 +27,7 @@ fun FamilyDTOInput.toEntity(neighborhood: Neighborhood, leadership: Leadership):
         neighborhood = neighborhood,
         observation = this.observation,
         leadership = leadership,
+        campaign = campaign,
         pictureUrl = this.pictureUrl,
         pictureSubscription = this.pictureSubscription
     )

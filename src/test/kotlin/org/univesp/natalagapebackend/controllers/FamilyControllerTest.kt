@@ -11,6 +11,7 @@ import org.univesp.natalagapebackend.models.DTO.toDTOOutput
 import org.univesp.natalagapebackend.services.ChildService
 import org.univesp.natalagapebackend.services.FamilyService
 import java.time.LocalDate
+import java.time.Year
 import java.util.*
 
 class FamilyControllerTest {
@@ -18,6 +19,8 @@ class FamilyControllerTest {
     private lateinit var familyService: FamilyService
     private lateinit var childService: ChildService
     private lateinit var familyController: FamilyController
+
+        private val testCampaign = Campaign(1, Year.now(), "Test Church")
 
     @BeforeEach
     fun setUp() {
@@ -44,7 +47,7 @@ class FamilyControllerTest {
                 leaderColor = "BLACK",
                 userName = "username",
                 password = "password"
-            )
+            ), testCampaign
         )
         val family02 = Family(
             2, "Family 2", "123456789", "123 Street", Neighborhood(1, "Centro"), "No observation", Leadership(
@@ -55,7 +58,7 @@ class FamilyControllerTest {
                 leaderColor = "BLACK",
                 userName = "username",
                 password = "password"
-            )
+            ), testCampaign
         )
 
         val child = Child(
@@ -67,7 +70,7 @@ class FamilyControllerTest {
         `when`(childService.findByFamilyId(family01.familyId)).thenReturn(listOf(child))
         `when`(childService.findByFamilyId(family02.familyId)).thenReturn(emptyList())
 
-        val result = familyController.listAll()
+        val result = familyController.listAll(null)
 
         val expected = listOf(
             FamilyWithChildrenDTO(
@@ -83,7 +86,7 @@ class FamilyControllerTest {
                         childId = 1,
                         childName = "name",
                         gender = "Male",
-                        age = 5,
+                        age = 1,
                         clothes = "",
                         shoes = "",
                         pictureUrl = null
@@ -92,7 +95,9 @@ class FamilyControllerTest {
                 leaderId = 1,
                 leaderName = "Leader 1",
                 pictureUrl = null,
-                pictureSubscription = null
+                pictureSubscription = null,
+                campaignId = 1,
+                campaignName = "${Year.now()} - Test Church"
             ),
             FamilyWithChildrenDTO(
                 familyId = 2,
@@ -106,7 +111,9 @@ class FamilyControllerTest {
                 leaderId = 1,
                 leaderName = "Leader 1",
                 pictureUrl = null,
-                pictureSubscription = null
+                pictureSubscription = null,
+                campaignId = 1,
+                campaignName = "${Year.now()} - Test Church"
             )
         )
 
@@ -117,7 +124,7 @@ class FamilyControllerTest {
     fun listAllReturnsEmptyListWhenNoFamiliesExist() {
         `when`(familyService.listAll()).thenReturn(emptyList())
 
-        val result = familyController.listAll()
+        val result = familyController.listAll(null)
 
         assertEquals(emptyList<FamilyWithChildrenDTO>(), result)
     }
@@ -133,7 +140,7 @@ class FamilyControllerTest {
                 leaderColor = "BLACK",
                 userName = "username",
                 password = "password"
-            )
+            ), testCampaign
         )
         val children = listOf(
             Child(1, "Child 1", "Male", 1, "Clothes", "Shoes", null,true, family)
@@ -166,7 +173,9 @@ class FamilyControllerTest {
                 leaderId = 1,
                 leaderName = "Leader 1",
                 pictureUrl = null,
-                pictureSubscription = null
+                pictureSubscription = null,
+                campaignId = 1,
+                campaignName = "${Year.now()} - Test Church"
             )
         )
 
@@ -193,15 +202,16 @@ class FamilyControllerTest {
 
     @Test
     fun saveCreatesFamily() {
-        val familyInput = FamilyDTOInput(1, "New Family", "123456789", "123 Street", 1, "No observation", leaderId = 1)
+        val familyInput = FamilyDTOInput(1, "New Family", "123456789", "123 Street", 1, "No observation", leaderId = 1, campaignId = 1)
         val familyOutput =
-            FamilyDTOOutput(1, "New Family", "123456789", "123 Street", null, "Centro", "No observation", 1, "Leader 1")
+            FamilyDTOOutput(1, "New Family", "123456789", "123 Street", null, "Centro", "No observation", 1, "Leader 1", null, null, 1, "${Year.now()} - Test Church")
         `when`(familyService.save(familyInput)).thenReturn(
             familyInput.toEntity(
                 Neighborhood(1, "Centro"),
                 Leadership(1, "Leader 1", "123456789", Role.LEADER, "BLACK",
                     userName = "username",
-                    password = "password")
+                    password = "password"),
+                testCampaign
             )
         )
 
@@ -213,7 +223,7 @@ class FamilyControllerTest {
     @Test
     fun updateModifiesFamily() {
         val familyInput =
-            FamilyDTOInput(1, "Updated Family", "123456789", "123 Street", 1, "No observation", leaderId = 1)
+            FamilyDTOInput(1, "Updated Family", "123456789", "123 Street", 1, "No observation", leaderId = 1, campaignId = 1)
         val existingFamily =
             Family(
                 1,
@@ -230,7 +240,7 @@ class FamilyControllerTest {
                     leaderColor = "BLACK",
                     userName = "username",
                     password = "password"
-                )
+                ), testCampaign
             )
         val updatedFamily =
             Family(
@@ -242,7 +252,7 @@ class FamilyControllerTest {
                     leaderColor = "BLACK",
                     userName = "username",
                     password = "password"
-                )
+                ), testCampaign
             )
         `when`(familyService.findById(1)).thenReturn(Optional.of(existingFamily))
         `when`(familyService.update(familyInput.copy(familyId = 1))).thenReturn(updatedFamily)
@@ -255,7 +265,7 @@ class FamilyControllerTest {
     @Test
     fun updateReturnsNotFoundForNonExistentId() {
         val familyInput =
-            FamilyDTOInput(1, "Updated Family", "123456789", "123 Street", 1, "No observation", leaderId = 1)
+            FamilyDTOInput(1, "Updated Family", "123456789", "123 Street", 1, "No observation", leaderId = 1, campaignId = 1)
         `when`(familyService.findById(999)).thenReturn(Optional.empty())
 
         val result = familyController.update(999, familyInput)

@@ -9,12 +9,14 @@ import org.mockito.Mockito.`when`
 import org.univesp.natalagapebackend.dto.ChildRequest
 import org.univesp.natalagapebackend.models.Child
 import org.univesp.natalagapebackend.models.Color
+import org.univesp.natalagapebackend.models.Campaign
 import org.univesp.natalagapebackend.models.Family
 import org.univesp.natalagapebackend.models.Leadership
 import org.univesp.natalagapebackend.models.Neighborhood
 import org.univesp.natalagapebackend.models.Role
 import org.univesp.natalagapebackend.repositories.ChildRepository
 import java.time.LocalDate
+import java.time.Year
 import java.util.Optional
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -23,6 +25,8 @@ class ChildServiceTest {
     private lateinit var childService: ChildService
     private lateinit var childRepository: ChildRepository
     private lateinit var familyService: FamilyService
+
+        private val testCampaign = Campaign(1, Year.now(), "Test Church")
 
     @BeforeEach
     fun setUp() {
@@ -63,7 +67,7 @@ class ChildServiceTest {
                 Role.ADMIN, Color.BLACK.toString(),
                 userName = "username",
                 password = "password"
-            ), true
+            ), testCampaign, true
         )
         val children = listOf(
             Child(1, "Child 1", "Male", 1, "Clothes", "Shoes", null, true, family),

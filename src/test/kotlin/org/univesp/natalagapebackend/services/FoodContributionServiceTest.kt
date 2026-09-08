@@ -31,6 +31,8 @@ class FoodContributionServiceTest {
     private lateinit var sponsorService: SponsorService
     private lateinit var childService: ChildService
 
+        private val testCampaign = Campaign(1, Year.now(), "Test Church")
+
     @BeforeEach
     fun setUp() {
         foodContributionRepository = mock(FoodContributionRepository::class.java)
@@ -91,7 +93,7 @@ class FoodContributionServiceTest {
             leaderColor = "BLACK",
             userName = "username",
             password = "password"
-        ))
+        ), testCampaign)
         `when`(campaignService.findById(1)).thenReturn(Optional.of(campaign))
         `when`(familyService.findById(1)).thenReturn(Optional.of(family))
         `when`(leadershipService.findById(1)).thenReturn(Optional.empty())
@@ -115,7 +117,7 @@ class FoodContributionServiceTest {
             leaderColor = "BLACK",
             userName = "username",
             password = "password"
-        ))
+        ), testCampaign)
         val leadership = Leadership(1, "Leader 1", "123456789", Role.ADMIN, Color.RED.toString(),
             userName = "username",
             password = "password")
@@ -143,7 +145,7 @@ class FoodContributionServiceTest {
             leaderColor = "BLACK",
             userName = "username",
             password = "password"
-        ))
+        ), testCampaign)
         val leadership = Leadership(1, "Leader 1", "123456789", Role.ADMIN, Color.RED.toString(),
             userName = "username",
             password = "password")

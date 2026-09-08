@@ -18,7 +18,13 @@ class ChildController(
 ) {
 
     @GetMapping
-    fun listAll(): List<Child> = childService.listAll()
+    fun listAll(@RequestParam(required = false) campaignId: Long?): List<Child> {
+        return if (campaignId != null) {
+            childService.listByCampaignId(campaignId)
+        } else {
+            childService.listAll()
+        }
+    }
 
     @GetMapping("/{id}")
     fun findById(@PathVariable id: Long): ResponseEntity<Child> {

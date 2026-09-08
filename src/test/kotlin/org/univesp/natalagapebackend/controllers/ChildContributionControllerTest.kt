@@ -34,6 +34,11 @@ class ChildContributionControllerTest {
             leaderColor = "BLACK",
             userName = "username",
             password = "password"
+        ),
+        campaign = Campaign(
+            campaignId = 1,
+            campaignYear = Year.now(),
+            campaignChurch = "Campaign Name"
         )
     )
     private val campaign = Campaign(

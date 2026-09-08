@@ -3,14 +3,17 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.*
 import org.univesp.natalagapebackend.dto.FamilyDTOInput
+import org.univesp.natalagapebackend.models.Campaign
 import org.univesp.natalagapebackend.models.Family
 import org.univesp.natalagapebackend.models.Leadership
 import org.univesp.natalagapebackend.models.Neighborhood
 import org.univesp.natalagapebackend.models.Role
 import org.univesp.natalagapebackend.repositories.FamilyRepository
+import org.univesp.natalagapebackend.services.CampaignService
 import org.univesp.natalagapebackend.services.FamilyService
 import org.univesp.natalagapebackend.services.LeadershipService
 import org.univesp.natalagapebackend.services.NeighborhoodService
+import java.time.Year
 import java.util.*
 
 class FamilyServiceTest {
@@ -19,14 +22,18 @@ class FamilyServiceTest {
     private lateinit var neighborhoodService: NeighborhoodService
     private lateinit var familyService: FamilyService
     private lateinit var leadershipService: LeadershipService
+    private lateinit var campaignService: CampaignService
 
+
+        private val testCampaign = Campaign(1, Year.now(), "Test Church")
 
     @BeforeEach
     fun setUp() {
         familyRepository = mock(FamilyRepository::class.java)
         neighborhoodService = mock(NeighborhoodService::class.java)
         leadershipService = mock(LeadershipService::class.java)
-        familyService = FamilyService(familyRepository, neighborhoodService, leadershipService)
+        campaignService = mock(CampaignService::class.java)
+        familyService = FamilyService(familyRepository, neighborhoodService, leadershipService, campaignService)
     }
 
     @Test
@@ -46,7 +53,7 @@ class FamilyServiceTest {
                     leaderColor = "BLACK",
                     userName = "username",
                     password = "password"
-                )
+                ), testCampaign
 
             ), Family(
                 2, "Family 2",
@@ -62,7 +69,7 @@ class FamilyServiceTest {
                     leaderColor = "WHITE",
                     userName = "username",
                     password = "password"
-                )
+                ), testCampaign
             )
         )
         `when`(familyRepository.findAllActive()).thenReturn(families)
@@ -88,7 +95,7 @@ class FamilyServiceTest {
                 leaderColor = "BLACK",
                 userName = "username",
                 password = "password"
-            )
+            ), testCampaign
         )
         `when`(familyRepository.findById(1)).thenReturn(Optional.of(family))
 
@@ -108,7 +115,7 @@ class FamilyServiceTest {
 
     @Test
     fun saveCreatesFamily() {
-        val familyDTO = FamilyDTOInput(1, "New Family", "123456789", "Address", 1, "Observation", leaderId = 1)
+        val familyDTO = FamilyDTOInput(1, "New Family", "123456789", "Address", 1, "Observation", leaderId = 1, campaignId = 1)
         val neighborhood = Neighborhood(1, "Neighborhood 1")
         val leadership = Leadership(
             leaderId = 1,
@@ -121,9 +128,10 @@ class FamilyServiceTest {
         )
         val family = Family(
             1, "New Family", "123456789", "Address", neighborhood, "Observation", leadership
-        )
+        , testCampaign)
         `when`(neighborhoodService.findById(1)).thenReturn(Optional.of(neighborhood))
         `when`(leadershipService.findById(1)).thenReturn(Optional.of(leadership))
+        `when`(campaignService.findById(1)).thenReturn(Optional.of(testCampaign))
         `when`(familyRepository.save(any(Family::class.java))).thenReturn(family)
 
         val result = familyService.save(familyDTO)
@@ -133,7 +141,7 @@ class FamilyServiceTest {
 
     @Test
     fun saveThrowsExceptionForNonExistentNeighborhood() {
-        val familyDTO = FamilyDTOInput(999, "New Family", "123456789", "Address", 1, "Observation", leaderId = 1)
+        val familyDTO = FamilyDTOInput(999, "New Family", "123456789", "Address", 1, "Observation", leaderId = 1, campaignId = 1)
         `when`(neighborhoodService.findById(999)).thenReturn(Optional.empty())
 
         assertThrows(IllegalArgumentException::class.java) {
@@ -144,7 +152,7 @@ class FamilyServiceTest {
     @Test
     fun updateModifiesFamily() {
         val familyDTO =
-            FamilyDTOInput(1, "Updated Family", "987654321", "New Address", 1, "New Observation", leaderId = 1)
+            FamilyDTOInput(1, "Updated Family", "987654321", "New Address", 1, "New Observation", leaderId = 1, campaignId = 1)
         val existingFamily =
             Family(
                 1,
@@ -161,7 +169,7 @@ class FamilyServiceTest {
                     leaderColor = "BLACK",
                     userName = "username",
                     password = "password"
-                )
+                ), testCampaign
             )
         val updatedFamily = Family(
             1,
@@ -178,7 +186,7 @@ class FamilyServiceTest {
                 leaderColor = "BLACK",
                 userName = "username",
                 password = "password"
-            )
+            ), testCampaign
         )
         `when`(familyRepository.findById(1)).thenReturn(Optional.of(existingFamily))
         `when`(neighborhoodService.findById(1)).thenReturn(Optional.of(Neighborhood(1, "Neighborhood 1")))
@@ -200,7 +208,7 @@ class FamilyServiceTest {
 
     @Test
     fun updateThrowsExceptionForNonExistentFamily() {
-        val familyDTO = FamilyDTOInput(1, "Updated Family", "987654321", "New Address", 999, "New Observation",leaderId =1)
+        val familyDTO = FamilyDTOInput(1, "Updated Family", "987654321", "New Address", 999, "New Observation", leaderId = 1, campaignId = 1)
         `when`(familyRepository.findById(999)).thenReturn(Optional.empty())
 
         assertThrows(IllegalArgumentException::class.java) {
@@ -210,7 +218,7 @@ class FamilyServiceTest {
 
     @Test
     fun updateThrowsExceptionForNonExistentNeighborhood() {
-        val familyDTO = FamilyDTOInput(1, "Updated Family", "987654321", "New Address", 1, "New Observation", leaderId = 1)
+        val familyDTO = FamilyDTOInput(1, "Updated Family", "987654321", "New Address", 1, "New Observation", leaderId = 1, campaignId = 1)
         val existingFamily =
             Family(1, "Existing Family", "123456789", "Address", Neighborhood(1, "Neighborhood 1"), "Observation",Leadership(
                 leaderId = 1,
@@ -220,7 +228,7 @@ class FamilyServiceTest {
                 leaderColor = "BLACK",
                 userName = "username",
                 password = "password"
-            ))
+            ), testCampaign)
         `when`(familyRepository.findById(1)).thenReturn(Optional.of(existingFamily))
         `when`(neighborhoodService.findById(1)).thenReturn(Optional.empty())
 

@@ -13,6 +13,9 @@ class ChildService(private val childRepository: ChildRepository, private val fam
 
     fun listAll(): List<Child> = childRepository.findAllActive()
 
+    fun listByCampaignId(campaignId: Long): List<Child> =
+        childRepository.findAllActiveByCampaignId(campaignId)
+
     fun findById(id: Long): Optional<Child> = childRepository.findById(id)
 
     fun findByFamilyId(familyId: Long): List<Child>? {

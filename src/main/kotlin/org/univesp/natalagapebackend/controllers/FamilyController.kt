@@ -20,8 +20,13 @@ class FamilyController(
 ) {
 
     @GetMapping
-    fun listAll(): List<FamilyWithChildrenDTO> {
-        return familyService.listAll().map { family ->
+    fun listAll(@RequestParam(required = false) campaignId: Long?): List<FamilyWithChildrenDTO> {
+        val families = if (campaignId != null) {
+            familyService.listByCampaignId(campaignId)
+        } else {
+            familyService.listAll()
+        }
+        return families.map { family ->
             val children = childService.findByFamilyId(family.familyId)
             toDTOOutput(family, children)
         }

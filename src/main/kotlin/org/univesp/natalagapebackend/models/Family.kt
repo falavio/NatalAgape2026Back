@@ -29,6 +29,10 @@ data class Family(
     @ManyToOne
     var leadership: Leadership,
 
+    @ManyToOne
+    @JoinColumn(name = "campaign_id", nullable = false)
+    val campaign: Campaign,
+
     @Column(nullable = false)
     var isActive: Boolean = true,
 

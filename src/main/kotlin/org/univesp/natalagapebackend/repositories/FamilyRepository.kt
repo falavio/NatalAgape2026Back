@@ -12,6 +12,9 @@ interface FamilyRepository : JpaRepository<Family, Long> {
     @Query("SELECT f FROM Family f WHERE f.isActive = true order by f.responsibleName")
     fun findAllActive(): List<Family>
 
+    @Query("SELECT f FROM Family f WHERE f.isActive = true AND f.campaign.campaignId = :campaignId ORDER BY f.responsibleName")
+    fun findAllActiveByCampaignId(campaignId: Long): List<Family>
+
     @Modifying
     @Query("UPDATE Family f SET f.isActive = false WHERE f.familyId = :familyId")
     fun deactivateFamily(familyId: Long)

@@ -82,7 +82,7 @@ class ChildContributionService(
         val campaign = campaignService.findById(campaignId).orElseThrow {
             EntityNotFoundException("Campaign not found")
         }
-        val children = childService.listAll()
+        val children = childService.listByCampaignId(campaignId)
 
         val childrenContributions =
             childContributionRepository.findChildrenContributionByCampaignId(campaign.campaignId)

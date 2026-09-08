@@ -102,7 +102,7 @@ class FoodContributionService(
             EntityNotFoundException("Campaign not found")
         }
 
-        val families = familyService.listAll().map { family ->
+        val families = familyService.listByCampaignId(campaignId).map { family ->
             val children = childService.findByFamilyId(family.familyId)
             family.copy(totalChildren = children)
         }

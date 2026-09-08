@@ -14,9 +14,13 @@ class FamilyService(
     private val familyRepository: FamilyRepository,
     private val neighborhoodService: NeighborhoodService,
     private val leadershipService: LeadershipService,
+    private val campaignService: CampaignService,
 ) {
 
     fun listAll(): List<Family> = familyRepository.findAllActive()
+
+    fun listByCampaignId(campaignId: Long): List<Family> =
+        familyRepository.findAllActiveByCampaignId(campaignId)
 
     fun findById(id: Long): Optional<Family> = familyRepository.findById(id)
 
@@ -28,8 +32,11 @@ class FamilyService(
         val leadership = leadershipService.findById(familyDTO.leaderId).getOrElse {
             throw IllegalArgumentException("Leadership not found")
         }
+        val campaign = campaignService.findById(familyDTO.campaignId).getOrElse {
+            throw IllegalArgumentException("Campaign not found")
+        }
 
-        return familyRepository.save(familyDTO.toEntity(neighborhood, leadership))
+        return familyRepository.save(familyDTO.toEntity(neighborhood, leadership, campaign))
     }
 
     fun update(familyDTO: FamilyDTOInput): Family {
@@ -49,6 +56,7 @@ class FamilyService(
                 neighborhood = newNeighborhood,
                 observation = familyDTO.observation,
                 leadership = leadership,
+                campaign = existingFamily.campaign,
                 pictureUrl = familyDTO.pictureUrl,
                 pictureSubscription = familyDTO.pictureSubscription
             )

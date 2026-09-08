@@ -27,6 +27,8 @@ class FoodContributionControllerTest {
     private lateinit var foodContributionService: FoodContributionService
     private lateinit var foodContributionController: FoodContributionController
 
+        private val testCampaign = Campaign(1, Year.now(), "Test Church")
+
     @BeforeEach
     fun setUp() {
         foodContributionService = mock(FoodContributionService::class.java)
@@ -63,7 +65,7 @@ class FoodContributionControllerTest {
                 leaderColor = "BLACK",
                 userName = "username",
                 password = "password"
-            )
+            ), testCampaign
         )
 
         val leadership = Leadership(1, "Leader1", "123456789", Role.ADMIN, Color.RED.toString(),
@@ -113,7 +115,7 @@ class FoodContributionControllerTest {
                 leaderColor = "BLACK",
                 userName = "username",
                 password = "password"
-            )
+            ), testCampaign
         )
         val leadership = Leadership(1, "Leader1", "123456789", Role.ADMIN, Color.RED.toString(),
             userName = "username",
@@ -167,7 +169,7 @@ class FoodContributionControllerTest {
                 leaderColor = "BLACK",
                 userName = "username",
                 password = "password"
-            )
+            ), testCampaign
         )
 
         val leadership = Leadership(1, "Leader1", "123456789", Role.ADMIN, Color.RED.toString(),
@@ -223,7 +225,7 @@ class FoodContributionControllerTest {
                 leaderColor = "BLACK",
                 userName = "username",
                 password = "password"
-            )
+            ), testCampaign
         )
 
         val leadership = Leadership(1, "Leader1", "123456789", Role.ADMIN, Color.RED.toString(),

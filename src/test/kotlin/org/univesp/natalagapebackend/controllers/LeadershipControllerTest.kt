@@ -12,6 +12,7 @@ import org.univesp.natalagapebackend.models.DTO.toDTO
 import org.univesp.natalagapebackend.models.Leadership
 import org.univesp.natalagapebackend.models.Role
 import org.univesp.natalagapebackend.services.LeadershipService
+import java.time.Year
 import java.util.*
 
 class LeadershipControllerTest {
@@ -33,7 +34,7 @@ class LeadershipControllerTest {
         )
         `when`(leadershipService.getAllLeaderships()).thenReturn(leaderships)
 
-        val result = leadershipController.getAllLeaderships()
+        val result = leadershipController.getAllLeaderships(null)
 
         assertEquals(ResponseEntity.ok(leaderships.map { it.toDTO() }), result)
     }
@@ -42,7 +43,7 @@ class LeadershipControllerTest {
     fun `getAllLeaderships deve retornar lista vazia`() {
         `when`(leadershipService.getAllLeaderships()).thenReturn(emptyList())
 
-        val result = leadershipController.getAllLeaderships()
+        val result = leadershipController.getAllLeaderships(null)
 
         assertEquals(ResponseEntity.ok(emptyList<LeadershipDTO>()), result)
     }

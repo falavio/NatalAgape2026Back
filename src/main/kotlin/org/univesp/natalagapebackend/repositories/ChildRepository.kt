@@ -14,6 +14,9 @@ interface ChildRepository : JpaRepository<Child, Long> {
     @Query("select * from child where is_active = true order by child_name", nativeQuery = true)
     fun findAllActive(): List<Child>
 
+    @Query("SELECT c FROM Child c WHERE c.isActive = true AND c.family.campaign.campaignId = :campaignId ORDER BY c.childName")
+    fun findAllActiveByCampaignId(campaignId: Long): List<Child>
+
     @Modifying
     @Query("update child set is_active = false where child_id = :id", nativeQuery = true)
     fun deactivateChild(id: Long)

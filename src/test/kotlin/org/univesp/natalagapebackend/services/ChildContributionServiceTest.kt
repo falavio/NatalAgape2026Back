@@ -30,6 +30,8 @@ class ChildContributionServiceTest {
     private lateinit var leadershipService: LeadershipService
     private lateinit var sponsorService: SponsorService
 
+        private val testCampaign = Campaign(1, Year.now(), "Test Church")
+
     @BeforeEach
     fun setUp() {
         childContributionRepository = mock(ChildContributionRepository::class.java)
@@ -54,7 +56,7 @@ class ChildContributionServiceTest {
             userName = "username",
             password = "password")
         val family =
-            Family(1, "Family 1", "123456789", "Address 1", Neighborhood(1, "City 1"), null, leadership,true, null)
+            Family(1, "Family 1", "123456789", "Address 1", Neighborhood(1, "City 1"), null, leadership, testCampaign, true, null)
         val child = Child(1, "Child 1", "Male", 1, "Clothes", "Shoes", null, true, family)
         val sponsor = Sponsor(1, "Sponsor 1", "123456789", "Address 1")
 
