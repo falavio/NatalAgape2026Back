@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*
 import org.univesp.natalagapebackend.dto.ChildRequest
 import org.univesp.natalagapebackend.dto.ChildResponse
 import org.univesp.natalagapebackend.dto.toResponse
-import org.univesp.natalagapebackend.models.Child
 import org.univesp.natalagapebackend.services.ChildService
 import org.univesp.natalagapebackend.services.FamilyService
 
@@ -18,18 +17,19 @@ class ChildController(
 ) {
 
     @GetMapping
-    fun listAll(@RequestParam(required = false) campaignId: Long?): List<Child> {
-        return if (campaignId != null) {
+    fun listAll(@RequestParam(required = false) campaignId: Long?): List<ChildResponse> {
+        val children = if (campaignId != null) {
             childService.listByCampaignId(campaignId)
         } else {
             childService.listAll()
         }
+        return children.map { it.toResponse(it.family) }
     }
 
     @GetMapping("/{id}")
-    fun findById(@PathVariable id: Long): ResponseEntity<Child> {
+    fun findById(@PathVariable id: Long): ResponseEntity<ChildResponse> {
         return childService.findById(id).map { child ->
-            ResponseEntity.ok(child)
+            ResponseEntity.ok(child.toResponse(child.family))
         }.orElse(ResponseEntity.notFound().build())
     }
 
